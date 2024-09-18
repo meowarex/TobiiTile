@@ -15,3 +15,8 @@ contextBridge.exposeInMainWorld('api', {
         }
     }
 });
+
+window.addEventListener('DOMContentLoaded', () => {
+    const title = document.getElementById('app-title');
+    if (title) title.innerText = 'Tobii Tile';
+});

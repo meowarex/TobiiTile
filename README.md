@@ -1,10 +1,10 @@
-# Accessible GUI
+# Tobii Tile
 
 Accessible GUI is an Electron-based application designed to provide an accessible graphical user interface. This README provides instructions on how to set up, run, test, and build the application.
 
 ## Table of Contents
 
-- [Accessible GUI](#accessible-gui)
+- [Tobii Tile](#tobii-tile)
   - [Table of Contents](#table-of-contents)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
