@@ -191,3 +191,10 @@ button {
 #theme-toggle:hover::after {
     opacity: 1;
 }
+
+.header-title {
+    font-size: 2rem;
+    color: #ffffff;
+    /* Updated project name */
+    content: "Tobii Tile";
+}

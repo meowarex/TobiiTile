@@ -22,7 +22,9 @@ function createWindow () {
     win.loadFile('src/index.html');
 }
 
-app.whenReady().then(createWindow);
+app.on('ready', () => {
+    createWindow('Tobii Tile');
+});
 
 // Handle Zoom IPC
 ipcMain.on('zoom-in', (event) => {

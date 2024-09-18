@@ -1,11 +1,11 @@
 {
-  "name": "accessible-gui",
+  "name": "tobiitile",
   "version": "1.0.0",
-  "description": "Accessible GUI Electron Application",
+  "description": "TobiiTile Electron Application",
   "main": "main.js",
   "scripts": {
     "start": "electron . --no-sandbox",
-    "package": "electron-packager . AccessibleGUI --platform=linux --arch=x64 --overwrite --ignore=node_modules/electron-* --icon=icon.png -- --no-sandbox",
+    "package": "electron-packager . TobiiTile --platform=linux --arch=x64 --overwrite --ignore=node_modules/electron-* --icon=icon.png -- --no-sandbox",
     "dist": "electron-builder"
   },
   "author": "Your Name",
@@ -16,7 +16,7 @@
     "electron-builder": "^23.6.0"
   },
   "build": {
-    "appId": "com.yourname.accessiblegui",
+    "appId": "com.atomix.tobiitile",
     "linux": {
       "target": "AppImage",
       "icon": "icon.png"
