@@ -7,20 +7,55 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-gray-900 text-white">
-    <div id="app" class="p-4">
-        <button id="theme-toggle" class="mb-4 bg-gray-700 text-white px-3 py-1 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
-            Toggle Theme
-        </button>
-        <!-- Dynamic content will be injected here -->
+<body class="bg-gray-900 text-white overflow-auto">
+    <!-- Top Bar with Theme Toggle, Zoom Controls, and Logout Button -->
+    <div class="flex justify-between items-center p-4 fixed top-0 left-0 right-0 border-b-2 border-gray-700 z-10">
+        
+        <!-- Left: Theme Toggle Button -->
+        <div class="flex items-center">
+            <button id="theme-toggle" aria-label="Toggle Theme" class="text-white flex items-center justify-center rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-12 h-12 sm:w-16 sm:h-16">
+                <!-- Theme Icon (Sun/Moon) -->
+                <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-8 sm:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <!-- Sun Icon (Initial) -->
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.07 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 12.728l-.707-.707M6.343 17.657l-.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Center: Zoom Controls with Embedded Pill UI -->
+        <div class="flex items-center">
+            <div class="flex items-center bg-gray-800 bg-opacity-50 rounded-full p-2 sm:p-4">
+                <button id="zoom-decrease" aria-label="Decrease Zoom" class="px-4 py-2 sm:px-6 sm:py-3 border border-gray-600 rounded-full bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    -
+                </button>
+                <span id="zoom-value" class="mx-2 sm:mx-4 px-4 sm:px-6 py-2 sm:py-3 bg-gray-600 text-white border border-gray-600 rounded-full text-lg sm:text-xl">
+                    100%
+                </span>
+                <button id="zoom-increase" aria-label="Increase Zoom" class="px-4 py-2 sm:px-6 sm:py-3 border border-gray-600 rounded-full bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    +
+                </button>
+            </div>
+        </div>
+
+        <!-- Right: Logout Button (Smaller Size) -->
+        <div class="flex items-center">
+            <button id="logout-button" aria-label="Logout" class="bg-red-500 text-white flex items-center justify-center rounded-md focus:outline-none focus:ring-2 focus:ring-red-300 w-10 h-10 sm:w-12 sm:h-12">
+                Logout
+            </button>
+        </div>
     </div>
-    <!-- Include Theme Script -->
+
+    <!-- Main Content Container -->
+    <div id="main-container" class="w-full mt-24 transform origin-top-left">
+        <div id="app" class="p-4 relative">
+            <!-- Dynamic content will be injected here -->
+        </div>
+    </div>
+
+    <!-- Include Scripts -->
     <script src="scripts/theme.js"></script>
-    <!-- Include Login Component Script -->
     <script src="components/Login/login.js"></script>
-    <!-- Include Home Component Script -->
     <script src="components/Home/home.js"></script>
-    <!-- Remove or comment out the following line if scripts.js is no longer needed -->
     <!-- <script src="scripts.js"></script> -->
 </body>
 </html>

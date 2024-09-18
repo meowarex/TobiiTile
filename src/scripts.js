@@ -20,23 +20,48 @@ document.addEventListener('DOMContentLoaded', () => {
         updateInputStyles(isDark);
     });
 
+    // Logout Button Functionality
+    const logoutButton = document.getElementById('logout-button');
+
+    logoutButton.addEventListener('click', () => {
+        const dashboardSection = document.getElementById('dashboard-section');
+        const loginSection = document.getElementById('login-section');
+
+        if (dashboardSection && loginSection) {
+            dashboardSection.classList.add('hidden');
+            loginSection.classList.remove('hidden');
+        } else {
+            console.error('Dashboard or Login section not found.');
+        }
+    });
+
     // Initial update based on default theme
     const isDarkMode = document.body.classList.contains('bg-gray-900');
     updateInputStyles(isDarkMode);
 
-    // Fetch and set Bing Image of the Day as the background
-    fetch('https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US')
-      .then(response => response.json())
-      .then(data => {
-          const imageUrl = 'https://www.bing.com' + data.images[0].url;
-          document.body.style.backgroundImage = `url(${imageUrl})`;
-          document.body.style.backgroundSize = 'cover';
-          document.body.style.backgroundPosition = 'center';
-          document.body.style.backgroundRepeat = 'no-repeat';
-      })
-      .catch(error => {
-          console.error('Error fetching Bing Image of the Day:', error);
-      });
+    // Zoom Controls Functionality
+    const zoomIncreaseButton = document.getElementById('zoom-increase');
+    const zoomDecreaseButton = document.getElementById('zoom-decrease');
+    let currentZoomLevel = 0; // Default zoom level
+
+    zoomIncreaseButton.addEventListener('click', () => {
+        if (window.api && typeof window.api.setZoomLevel === 'function') {
+            currentZoomLevel += 1;
+            window.api.setZoomLevel(currentZoomLevel);
+        }
+    });
+
+    zoomDecreaseButton.addEventListener('click', () => {
+        if (window.api && typeof window.api.setZoomLevel === 'function') {
+            currentZoomLevel -= 1;
+            window.api.setZoomLevel(currentZoomLevel);
+        }
+    });
+
+    // Ensure initial zoom level is set correctly
+    if (window.api && typeof window.api.getZoomLevel === 'function') {
+        currentZoomLevel = window.api.getZoomLevel();
+    }
 });
 
 // Function to update input styles based on theme
@@ -52,3 +77,15 @@ function updateInputStyles(isDark) {
         }
     });
 }
+
+// Remove or comment out any zoom-related functions
+// Example:
+/*
+function decreaseZoom() {
+    // Logic to decrease zoom
+}
+
+function increaseZoom() {
+    // Logic to increase zoom
+}
+*/

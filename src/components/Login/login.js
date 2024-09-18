@@ -50,9 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loginSection.appendChild(loginTitle);
     loginSection.appendChild(form);
 
-    // Create Dashboard Section is moved to Home component
-    // Remove Dashboard-related code from Login component
-
+    // Add Login Section to App
     app.appendChild(loginSection);
 
     // Handle Login

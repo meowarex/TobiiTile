@@ -9,33 +9,44 @@ function initializeDashboard() {
 
     const dashboardTitle = document.createElement('h2');
     dashboardTitle.textContent = 'Home';
-    dashboardTitle.className = 'text-2xl mb-4 text-center';
+    dashboardTitle.className = 'text-2xl mb-6 text-center';
 
-    const buttonGrid = document.createElement('div');
-    buttonGrid.className = 'grid grid-cols-2 gap-4';
+    // Pinned Actions Section with 4 Large Square Buttons
+    const pinnedActions = document.createElement('div');
+    pinnedActions.className = 'flex flex-wrap justify-center gap-4 mb-8';
 
-    // Example Buttons
+    // Adjust button classes for responsiveness and alignment
     for (let i = 1; i <= 4; i++) {
         const button = document.createElement('button');
-        button.textContent = `Button ${i}`;
-        button.className = 'bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300';
-        button.onclick = () => alert(`Button ${i} Clicked`);
-        buttonGrid.appendChild(button);
+        button.textContent = `Pinned Action ${i}`;
+        button.className = 'bg-blue-500 text-white flex-grow min-w-[120px] h-32 sm:h-40 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300';
+        button.onclick = () => alert(`Pinned Action ${i} Clicked`);
+        pinnedActions.appendChild(button);
     }
 
-    // Logout Button
-    const logoutButton = document.createElement('button');
-    logoutButton.textContent = 'Logout';
-    logoutButton.className = 'mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300';
-    logoutButton.onclick = () => {
-        dashboardSection.classList.add('hidden');
-        const loginSection = document.getElementById('login-section');
-        loginSection.classList.remove('hidden');
-    };
+    // Favorites Section with Title and 4 Large Square Buttons
+    const favoritesTitle = document.createElement('h3');
+    favoritesTitle.textContent = 'Favorites';
+    favoritesTitle.className = 'text-xl mb-4 text-center';
 
+    const favoritesActions = document.createElement('div');
+    favoritesActions.className = 'flex flex-wrap justify-center gap-4 mb-8';
+
+    for (let i = 1; i <= 4; i++) {
+        const button = document.createElement('button');
+        button.textContent = `Favorite ${i}`;
+        button.className = 'bg-purple-500 text-white flex-grow min-w-[120px] h-32 sm:h-40 rounded-lg hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-300';
+        button.onclick = () => alert(`Favorite ${i} Clicked`);
+        favoritesActions.appendChild(button);
+    }
+
+    // Append sections to Dashboard
     dashboardSection.appendChild(dashboardTitle);
-    dashboardSection.appendChild(buttonGrid);
-    dashboardSection.appendChild(logoutButton);
+    dashboardSection.appendChild(pinnedActions);
+
+    // Append Favorites Section
+    dashboardSection.appendChild(favoritesTitle);
+    dashboardSection.appendChild(favoritesActions);
 
     app.appendChild(dashboardSection);
 }

@@ -17,9 +17,9 @@ button:focus {
     box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.6);
 }
 
-/* Optional: Smooth transition for theme change */
-body, button, input, label {
-    transition: background-color 0.3s, color 0.3s;
+/* Optional: Smooth transition for theme change and zoom */
+body, button, input, label, #app {
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
 }
 
 /* Add glass effect styling for the login container */
@@ -46,10 +46,70 @@ body.bg-gray-900 #login-section input {
 
 /* Ensure the background image is visible by adjusting background opacity */
 body.bg-gray-900 {
-    background-color: rgba(17, 24, 39, 0.8); /* Tailwind's gray-900 with 80% opacity */
+    background-color: rgba(0, 0, 0, 0.9); /* Increased opacity for a darker background */
 }
 
 /* Optional: Add a fallback background color */
 body {
     background-color: #1a202c; /* Tailwind's gray-900 */
+}
+
+/* Style for the theme toggle button */
+#theme-toggle {
+    width: 80px; /* Increased width from 64px to 80px */
+    height: 80px; /* Increased height from 64px to 80px to make it more square */
+}
+
+/* Style for the logout button */
+#logout-button {
+    width: 64px; /* Reduced width from 80px to 64px */
+    height: 64px; /* Reduced height from 80px to 64px */
+    font-size: 1rem; /* Adjust text size for better fit */
+}
+
+/* Remove any zoom-related styles */
+/* Example: */
+/* #zoom-slider { */
+/*     width: 200px; */
+/* } */
+
+/* Ensure buttons are responsive and do not have conflicting fixed sizes */
+button {
+    /* Remove any fixed width or height if present */
+    /* Example: */
+    /* width: 100px; */
+    /* height: 40px; */
+}
+
+/* Optional: Add media queries if further adjustments are needed */
+@media (max-width: 640px) {
+    /* Styles for small screens */
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    /* Styles for medium screens */
+}
+
+@media (min-width: 1025px) {
+    /* Styles for large screens */
+}
+
+/* Center the zoom controls within the top bar */
+.flex > .flex.items-center:last-child {
+    /* Ensure the rightmost div doesn't interfere with centering */
+    margin-left: auto;
+}
+
+/* Adjust the Center Zoom Controls Container */
+.flex.items-center > .flex {
+    /* Center the zoom controls */
+    margin: 0 auto;
+}
+
+/* Optional: Ensure the zoom controls remain centered on all screen sizes */
+@media (min-width: 640px) {
+    .flex.items-center > .flex {
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
