@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessible GUI</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-900 text-white">
+    <div id="app" class="p-4">
+        <button id="theme-toggle" class="mb-4 bg-gray-700 text-white px-3 py-1 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+            Toggle Theme
+        </button>
+        <!-- Dynamic content will be injected here -->
+    </div>
+    <!-- Include Theme Script -->
+    <script src="scripts/theme.js"></script>
+    <!-- Include Login Component Script -->
+    <script src="components/Login/login.js"></script>
+    <!-- Include Home Component Script -->
+    <script src="components/Home/home.js"></script>
+    <!-- Remove or comment out the following line if scripts.js is no longer needed -->
+    <!-- <script src="scripts.js"></script> -->
+</body>
+</html>

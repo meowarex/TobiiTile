@@ -1,0 +1,55 @@
+/* Add any custom styles here */
+
+/* Custom styles for additional accessibility enhancements */
+
+/* Example: High contrast mode */
+@media (prefers-contrast: high) {
+    body {
+        background-color: #000;
+        color: #fff;
+    }
+    /* Additional high-contrast styles */
+}
+
+/* Ensure buttons have sufficient focus indicators */
+button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.6);
+}
+
+/* Optional: Smooth transition for theme change */
+body, button, input, label {
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Add glass effect styling for the login container */
+#login-section {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Inverted text and background for input fields */
+#login-section input {
+    /* Light Mode */
+    background-color: white;
+    color: #1a202c; /* Tailwind's gray-900 */
+    border-color: #d2d6dc; /* Tailwind's gray-300 */
+}
+
+body.bg-gray-900 #login-section input {
+    /* Dark Mode */
+    background-color: #4a5568; /* Tailwind's gray-700 */
+    color: white;
+    border-color: #4a5568; /* Tailwind's gray-600 */
+}
+
+/* Ensure the background image is visible by adjusting background opacity */
+body.bg-gray-900 {
+    background-color: rgba(17, 24, 39, 0.8); /* Tailwind's gray-900 with 80% opacity */
+}
+
+/* Optional: Add a fallback background color */
+body {
+    background-color: #1a202c; /* Tailwind's gray-900 */
+}

@@ -1,0 +1,1 @@
+// Removed: scripts/background.js is no longer needed.
