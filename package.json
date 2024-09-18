@@ -1,1 +1,25 @@
- 
+{
+  "name": "accessible-gui",
+  "version": "1.0.0",
+  "description": "Accessible GUI Electron Application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron . --no-sandbox",
+    "package": "electron-packager . AccessibleGUI --platform=linux --arch=x64 --overwrite --ignore=node_modules/electron-* --icon=icon.png -- --no-sandbox",
+    "dist": "electron-builder"
+  },
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^25.2.0",
+    "electron-packager": "^17.1.1",
+    "electron-builder": "^23.6.0"
+  },
+  "build": {
+    "appId": "com.yourname.accessiblegui",
+    "linux": {
+      "target": "AppImage",
+      "icon": "icon.png"
+    }
+  }
+}

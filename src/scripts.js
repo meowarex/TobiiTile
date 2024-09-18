@@ -42,26 +42,54 @@ document.addEventListener('DOMContentLoaded', () => {
     // Zoom Controls Functionality
     const zoomIncreaseButton = document.getElementById('zoom-increase');
     const zoomDecreaseButton = document.getElementById('zoom-decrease');
-    let currentZoomLevel = 0; // Default zoom level
+    const zoomValueSpan = document.getElementById('zoom-value');
+    let currentZoomLevel = 0; // Default zoom level corresponding to 100%
 
-    zoomIncreaseButton.addEventListener('click', () => {
-        if (window.api && typeof window.api.setZoomLevel === 'function') {
-            currentZoomLevel += 1;
-            window.api.setZoomLevel(currentZoomLevel);
-        }
-    });
+    // Function to update the zoom value display
+    function updateZoomValue() {
+        const zoomPercentage = 100 + (currentZoomLevel * 20); // Each level is ~20%
+        zoomValueSpan.textContent = `${zoomPercentage}%`;
+    }
 
-    zoomDecreaseButton.addEventListener('click', () => {
-        if (window.api && typeof window.api.setZoomLevel === 'function') {
-            currentZoomLevel -= 1;
-            window.api.setZoomLevel(currentZoomLevel);
-        }
-    });
-
-    // Ensure initial zoom level is set correctly
+    // Initialize zoom level from Electron's webFrame
     if (window.api && typeof window.api.getZoomLevel === 'function') {
         currentZoomLevel = window.api.getZoomLevel();
+        updateZoomValue();
     }
+
+    // Event listener for Zoom Increase
+    zoomIncreaseButton.addEventListener('click', () => {
+        if (window.api && typeof window.api.setZoomLevel === 'function') {
+            if (currentZoomLevel < 10) { // Prevent excessive zoom in
+                currentZoomLevel += 1;
+                window.api.setZoomLevel(currentZoomLevel);
+                updateZoomValue();
+                localStorage.setItem('zoomLevel', currentZoomLevel);
+            }
+        }
+    });
+
+    // Event listener for Zoom Decrease
+    zoomDecreaseButton.addEventListener('click', () => {
+        if (window.api && typeof window.api.setZoomLevel === 'function') {
+            if (currentZoomLevel > -10) { // Prevent excessive zoom out
+                currentZoomLevel -= 1;
+                window.api.setZoomLevel(currentZoomLevel);
+                updateZoomValue();
+                localStorage.setItem('zoomLevel', currentZoomLevel);
+            }
+        }
+    });
+
+    // Restore Zoom Level on Load
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedZoomLevel = parseInt(localStorage.getItem('zoomLevel'), 10);
+        if (!isNaN(savedZoomLevel)) {
+            currentZoomLevel = savedZoomLevel;
+            window.api.setZoomLevel(currentZoomLevel);
+            updateZoomValue();
+        }
+    });
 });
 
 // Function to update input styles based on theme

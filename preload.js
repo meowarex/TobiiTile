@@ -1,10 +1,17 @@
-const { contextBridge, webFrame } = require('electron');
+const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('api', {
-    setZoomLevel: (level) => {
-        webFrame.setZoomLevel(level);
+    send: (channel, data) => {
+        const validChannels = ['zoom-in', 'zoom-out'];
+        if (validChannels.includes(channel)) {
+            ipcRenderer.send(channel, data);
+        }
     },
-    getZoomLevel: () => {
-        return webFrame.getZoomLevel();
+    // Optionally, expose methods to receive data from main process
+    receive: (channel, func) => {
+        const validChannels = ['fromMain'];
+        if (validChannels.includes(channel)) {
+            ipcRenderer.on(channel, (event, ...args) => func(...args));
+        }
     }
 });

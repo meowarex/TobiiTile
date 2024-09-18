@@ -56,8 +56,40 @@ body {
 
 /* Style for the theme toggle button */
 #theme-toggle {
-    width: 80px; /* Increased width from 64px to 80px */
-    height: 80px; /* Increased height from 64px to 80px to make it more square */
+    background-color: transparent; /* Remove background */
+    border: none; /* Remove border */
+    width: 80px; /* Maintain original width */
+    height: 80px; /* Maintain original height */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.bg-gray-900 #theme-toggle {
+    background-color: #4a5568; /* Tailwind's gray-700 for Dark Mode */
+    color: #fff; /* White text in Dark Mode */
+}
+
+body:not(.bg-gray-900) #theme-toggle {
+    background-color: #3b82f6; /* Tailwind's blue-500 for Light Mode */
+    color: #1a202c; /* Tailwind's gray-900 for Light Mode */
+}
+
+/* Restore icon color adjustments */
+body.bg-gray-900 #theme-toggle svg {
+    stroke: #fff; /* White icon in Dark Mode */
+}
+
+body:not(.bg-gray-900) #theme-toggle svg {
+    stroke: #1a202c; /* Dark icon in Light Mode */
+}
+
+/* Restore hover background color */
+#theme-toggle:hover {
+    background-color: #2563eb; /* Darker blue on hover for Light Mode */
+}
+
+/* Ensure focus ring remains visible */
+#theme-toggle:focus {
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.6);
 }
 
 /* Style for the logout button */
@@ -112,4 +144,50 @@ button {
         margin-left: auto;
         margin-right: auto;
     }
+}
+
+/* Remove any CSS transform scaling related to zoom */
+/* Ensure no elements use transform: scale(...) for zoom */
+
+/* Example: If previously applied, remove or comment out */
+/*
+#main-container {
+    transform: scale(1.5);
+    transform-origin: top left;
+}
+*/
+
+/* Ensure the top bar content doesn't overlap */
+.top-bar {
+    position: relative;
+}
+
+/* Adjust positions if necessary */
+.absolute.left-4 {
+    left: 1rem; /* Adjust as needed */
+}
+
+.absolute.right-4 {
+    right: 1rem; /* Adjust as needed */
+}
+
+/* Optional: Add a tooltip for better accessibility */
+#theme-toggle::after {
+    content: attr(aria-label);
+    position: absolute;
+    bottom: -1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    opacity: 0;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+#theme-toggle:hover::after {
+    opacity: 1;
 }

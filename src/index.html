@@ -9,21 +9,22 @@
 </head>
 <body class="bg-gray-900 text-white overflow-auto">
     <!-- Top Bar with Theme Toggle, Zoom Controls, and Logout Button -->
-    <div class="flex justify-between items-center p-4 fixed top-0 left-0 right-0 border-b-2 border-gray-700 z-10">
-        
+    <div class="flex items-center p-4 fixed top-0 left-0 right-0 border-b-2 border-gray-700 z-10 w-full">
+
         <!-- Left: Theme Toggle Button -->
-        <div class="flex items-center">
+        <div class="absolute left-4">
             <button id="theme-toggle" aria-label="Toggle Theme" class="text-white flex items-center justify-center rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-12 h-12 sm:w-16 sm:h-16">
                 <!-- Theme Icon (Sun/Moon) -->
                 <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-8 sm:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <!-- Sun Icon (Initial) -->
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.07 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 12.728l-.707-.707M6.343 17.657l-.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2v2m6.364 1.636l-1.414 1.414M20 12h-2M6 12H4m1.636 6.364l1.414-1.414M12 20v-2m-4.95-4.95l-1.414 1.414M6.343 6.343l1.414 1.414" />
+                    <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2" fill="none" />
                 </svg>
             </button>
         </div>
 
         <!-- Center: Zoom Controls with Embedded Pill UI -->
-        <div class="flex items-center">
+        <div class="mx-auto">
             <div class="flex items-center bg-gray-800 bg-opacity-50 rounded-full p-2 sm:p-4">
                 <button id="zoom-decrease" aria-label="Decrease Zoom" class="px-4 py-2 sm:px-6 sm:py-3 border border-gray-600 rounded-full bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
                     -
@@ -38,7 +39,7 @@
         </div>
 
         <!-- Right: Logout Button (Smaller Size) -->
-        <div class="flex items-center">
+        <div class="absolute right-4">
             <button id="logout-button" aria-label="Logout" class="bg-red-500 text-white flex items-center justify-center rounded-md focus:outline-none focus:ring-2 focus:ring-red-300 w-10 h-10 sm:w-12 sm:h-12">
                 Logout
             </button>
