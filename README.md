@@ -1,6 +1,6 @@
 # Tobii Tile
 
-Accessible GUI is an Electron-based application designed to provide an accessible graphical user interface. This README provides instructions on how to set up, run, test, and build the application.
+Tobii Tile is an Electron-based application designed to provide an accessible graphical user interface. This README provides instructions on how to set up, run, test, and build the application.
 
 ## Table of Contents
 
@@ -29,8 +29,8 @@ Before you begin, ensure you have the following installed:
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/yourusername/accessible-gui.git
-   cd accessible-gui
+   git clone https://github.com/A-T-O-M-I-X/TobiiTile.git
+   cd TobiiTile
    ```
 
 2. **Install Dependencies**
@@ -65,9 +65,7 @@ To package the Electron application for Linux using Electron Packager:
 npm run package
 ```
 
-This command uses [Electron Packager](https://github.com/electron/electron-packager) to package the app. The output will be in a directory named `AccessibleGUI-linux-x64` within your project folder.
-
-**Note:** Ensure you have an `icon.png` file in the root directory for the application icon.
+This command uses [Electron Packager](https://github.com/electron/electron-packager) to package the app. The output will be in a directory named `TobiiTile-linux-x64` within your project folder.
 
 ### Distributing the Application
 
@@ -95,7 +93,7 @@ For more advanced packaging and distribution using Electron Builder:
 
    ```bash
    chmod +x AccessibleGUI-*.AppImage
-   ./AccessibleGUI-*.AppImage
+   ./TobiiTile-*.AppImage
    ```
 
 ## Usage
