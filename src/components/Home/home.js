@@ -18,9 +18,9 @@ function initializeDashboard() {
     // Adjust button classes for responsiveness and alignment
     for (let i = 1; i <= 4; i++) {
         const button = document.createElement('button');
-        button.textContent = `Pinned Action ${i}`;
+        button.textContent = `Navigation ${i}`;
         button.className = 'bg-blue-500 text-white flex-grow min-w-[120px] h-32 sm:h-40 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300';
-        button.onclick = () => alert(`Pinned Action ${i} Clicked`);
+        button.onclick = () => alert(`Navigation ${i} Clicked`);
         pinnedActions.appendChild(button);
     }
 
