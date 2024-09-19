@@ -4,12 +4,46 @@ document.addEventListener('DOMContentLoaded', () => {
     // Theme Toggle Functionality
     const themeToggleButton = document.getElementById('theme-toggle');
 
+    // Select the Top Bar element
+    const topBar = document.getElementById('top-bar');
+
+    // Select the Main Container element
+    const mainContainer = document.getElementById('main-container');
+
+    // Select the App element
+    const appContainer = document.getElementById('app');
+
     themeToggleButton.addEventListener('click', () => {
         const isDark = document.body.classList.toggle('bg-gray-900');
         document.body.classList.toggle('bg-white');
         document.body.classList.toggle('text-white');
         document.body.classList.toggle('text-gray-900');
         
+        // Update Top Bar background based on the current theme
+        if (isDark) {
+            topBar.classList.remove('bg-gray-100'); // Remove light mode bg
+            topBar.classList.add('bg-gray-900');    // Add dark mode bg
+
+            // Update Main Container background
+            mainContainer.classList.remove('bg-white'); // Remove light mode bg
+            mainContainer.classList.add('bg-gray-900');  // Add dark mode bg
+
+            // Update App Container background
+            appContainer.classList.remove('bg-white'); // Remove light mode bg
+            appContainer.classList.add('bg-gray-900');  // Add dark mode bg
+        } else {
+            topBar.classList.remove('bg-gray-900'); // Remove dark mode bg
+            topBar.classList.add('bg-gray-100');    // Add light mode bg (almost white)
+
+            // Update Main Container background
+            mainContainer.classList.remove('bg-gray-900'); // Remove dark mode bg
+            mainContainer.classList.add('bg-white');        // Add light mode bg (white)
+
+            // Update App Container background
+            appContainer.classList.remove('bg-gray-900'); // Remove dark mode bg
+            appContainer.classList.add('bg-white');        // Add light mode bg (white)
+        }
+
         // Toggle button colors
         themeToggleButton.classList.toggle('bg-gray-700');
         themeToggleButton.classList.toggle('bg-gray-300');
@@ -51,43 +85,88 @@ document.addEventListener('DOMContentLoaded', () => {
         zoomValueSpan.textContent = `${zoomPercentage}%`;
     }
 
-    // Initialize zoom level from Electron's webFrame
+    // Initialize zoom level from Electron's API
     if (window.api && typeof window.api.getZoomLevel === 'function') {
-        currentZoomLevel = window.api.getZoomLevel();
-        updateZoomValue();
+        window.api.getZoomLevel().then(level => {
+            console.log(`Initialized zoom level: ${level}`); // Debug log
+            currentZoomLevel = level;
+            updateZoomValue();
+        }).catch(err => {
+            console.error('Error getting zoom level:', err);
+        });
+    } else {
+        console.error('getZoomLevel function is not available'); // Debug log
     }
 
-    // Event listener for Zoom Increase
-    zoomIncreaseButton.addEventListener('click', () => {
+    // Updated Event Listener for Zoom Increase
+    zoomIncreaseButton.addEventListener('click', async () => {
+        console.log('Zoom Increase button clicked'); // Debug log
         if (window.api && typeof window.api.setZoomLevel === 'function') {
             if (currentZoomLevel < 10) { // Prevent excessive zoom in
                 currentZoomLevel += 1;
-                window.api.setZoomLevel(currentZoomLevel);
-                updateZoomValue();
-                localStorage.setItem('zoomLevel', currentZoomLevel);
+                console.log(`Setting zoom level to: ${currentZoomLevel}`); // Debug log
+                try {
+                    const success = await window.api.setZoomLevel(currentZoomLevel);
+                    if (success) {
+                        updateZoomValue();
+                        localStorage.setItem('zoomLevel', currentZoomLevel);
+                        console.log(`Zoom level successfully set to: ${currentZoomLevel}`); // Debug log
+                    } else {
+                        console.error('Failed to set zoom level.');
+                    }
+                } catch (error) {
+                    console.error('Error setting zoom level:', error);
+                }
+            } else {
+                console.error('Maximum zoom level reached'); // Debug log
             }
+        } else {
+            console.error('setZoomLevel function is not available'); // Debug log
         }
     });
 
-    // Event listener for Zoom Decrease
-    zoomDecreaseButton.addEventListener('click', () => {
+    // Updated Event Listener for Zoom Decrease
+    zoomDecreaseButton.addEventListener('click', async () => {
+        console.log('Zoom Decrease button clicked'); // Debug log
         if (window.api && typeof window.api.setZoomLevel === 'function') {
             if (currentZoomLevel > -10) { // Prevent excessive zoom out
                 currentZoomLevel -= 1;
-                window.api.setZoomLevel(currentZoomLevel);
-                updateZoomValue();
-                localStorage.setItem('zoomLevel', currentZoomLevel);
+                console.log(`Setting zoom level to: ${currentZoomLevel}`); // Debug log
+                try {
+                    const success = await window.api.setZoomLevel(currentZoomLevel);
+                    if (success) {
+                        updateZoomValue();
+                        localStorage.setItem('zoomLevel', currentZoomLevel);
+                        console.log(`Zoom level successfully set to: ${currentZoomLevel}`); // Debug log
+                    } else {
+                        console.error('Failed to set zoom level.');
+                    }
+                } catch (error) {
+                    console.error('Error setting zoom level:', error);
+                }
+            } else {
+                console.error('Minimum zoom level reached'); // Debug log
             }
+        } else {
+            console.error('setZoomLevel function is not available'); // Debug log
         }
     });
 
     // Restore Zoom Level on Load
-    document.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('load', () => {
         const savedZoomLevel = parseInt(localStorage.getItem('zoomLevel'), 10);
         if (!isNaN(savedZoomLevel)) {
             currentZoomLevel = savedZoomLevel;
-            window.api.setZoomLevel(currentZoomLevel);
-            updateZoomValue();
+            window.api.setZoomLevel(currentZoomLevel).then(success => {
+                if (success) {
+                    updateZoomValue();
+                    console.log(`Restored zoom level to: ${currentZoomLevel}`); // Debug log
+                } else {
+                    console.error('Failed to restore zoom level.');
+                }
+            }).catch(err => {
+                console.error('Error restoring zoom level:', err);
+            });
         }
     });
 });
@@ -105,15 +184,3 @@ function updateInputStyles(isDark) {
         }
     });
 }
-
-// Remove or comment out any zoom-related functions
-// Example:
-/*
-function decreaseZoom() {
-    // Logic to decrease zoom
-}
-
-function increaseZoom() {
-    // Logic to increase zoom
-}
-*/

@@ -9,8 +9,7 @@
 </head>
 <body class="bg-gray-900 text-white overflow-auto">
     <!-- Top Bar with Theme Toggle, Zoom Controls, and Logout Button -->
-    <div class="flex items-center p-4 fixed top-0 left-0 right-0 border-b-2 border-gray-700 z-10 w-full">
-
+    <div id="top-bar" class="flex items-center p-4 fixed top-0 left-0 right-0 border-b-2 border-gray-700 bg-gray-900 rounded-none z-10 w-full">
         <!-- Left: Theme Toggle Button -->
         <div class="absolute left-4">
             <button id="theme-toggle" aria-label="Toggle Theme" class="text-white flex items-center justify-center rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-12 h-12 sm:w-16 sm:h-16">
@@ -25,7 +24,7 @@
 
         <!-- Center: Zoom Controls with Embedded Pill UI -->
         <div class="mx-auto">
-            <div class="flex items-center bg-gray-800 bg-opacity-50 rounded-full p-2 sm:p-4">
+            <div class="flex items-center bg-gray-800 bg-opacity-100 rounded-full p-2 sm:p-4">
                 <button id="zoom-decrease" aria-label="Decrease Zoom" class="px-4 py-2 sm:px-6 sm:py-3 border border-gray-600 rounded-full bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
                     -
                 </button>
@@ -53,10 +52,10 @@
         </div>
     </div>
 
-    <!-- Include Scripts -->
-    <script src="scripts/theme.js"></script>
-    <script src="components/Login/login.js"></script>
-    <script src="components/Home/home.js"></script>
-    <!-- <script src="scripts.js"></script> -->
+    <!-- Include Scripts with defer -->
+    <script src="components/Login/login.js" defer></script> <!-- Load Login first to ensure elements are available -->
+    <script src="scripts/theme.js" defer></script>
+    <script src="components/Home/home.js" defer></script>
+    <script src="scripts.js" defer></script> <!-- Enable event handlers -->
 </body>
 </html>
